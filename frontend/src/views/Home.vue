@@ -5,6 +5,7 @@
     <div class="container">
       <button id="new">New poll</button>
       <form class="existing">
+        <label for="code">code</label>
         <input type="text" name="code" id="code">
         <button id="existing">Go</button>
       </form>

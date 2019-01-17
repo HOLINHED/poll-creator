@@ -1,4 +1,4 @@
-# frontend
+# poll creator
 
 ## Project setup
 ```

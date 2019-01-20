@@ -13,12 +13,12 @@
 
 <script>
 // @ is an alias to /src
-import ExistingForm from "@/components/ExistingForm.vue";
+import ExistingForm from '@/components/ExistingForm.vue';
 
 export default {
   name: 'home',
   components: {
-    ExistingForm
+    ExistingForm,
   },
 };
 </script>

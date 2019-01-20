@@ -10,22 +10,20 @@
 import config from '@/config.js';
 
 export default {
-   name: 'exiting-form',
-   data() {
-      return {
-         id: null,
+  name: 'exiting-form',
+  data() {
+    return {
+      id: null,
+    };
+  },
+  methods: {
+    submit() {
+      if (this.id) {
+        console.log(config.API);
       }
-   },
-   methods: {
-      submit() {
-
-         if (this.id) {
-            console.log(config.API)
-         }
-
-      }
-   }
-}
+    },
+  },
+};
 </script>
 
 <style>

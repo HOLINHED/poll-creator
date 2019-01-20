@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import config from '@/config.js';
+import store from '@/store.js';
 
 export default {
   name: 'exiting-form',
@@ -18,9 +18,12 @@ export default {
   },
   methods: {
     submit() {
-      if (this.id) {
-        console.log(config.API);
+      if (this.id && this.id.toString().length > 2) {
+        store.commit('changeID', this.id);
+
+        this.$router.push('/poll');
       }
+      // TODO: Add error notification
     },
   },
 };

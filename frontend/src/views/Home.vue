@@ -3,23 +3,22 @@
     <h1>Welcome!</h1>
     <p>Create a new poll or access an existing one</p>
     <div class="container">
-      <button id="new">New poll</button>
-      <form class="existing">
-        <label for="code">code</label>
-        <input type="text" name="code" id="code">
-        <button id="existing">Go</button>
-      </form>
+      <router-link to="/new">
+        <button id="new">New poll</button>
+      </router-link>
+      <ExistingForm />
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import ExistingForm from "@/components/ExistingForm.vue";
 
 export default {
   name: 'home',
   components: {
-    
+    ExistingForm
   },
 };
 </script>

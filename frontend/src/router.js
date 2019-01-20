@@ -22,9 +22,14 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
+      path: '/new',
+      name: 'createPoll',
+      component: () => import('./views/Create.vue'),
+    },
+    {
       path: '/*',
       name: 'notFound',
       component: () => import('./views/notFound.vue'),
-    },
+    }
   ],
 });

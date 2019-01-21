@@ -8,13 +8,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     pollID: null,
-    pollData: {},
+    pollData: null,
   },
   mutations: {
     changeID(state, id) {
       state.pollID = id;
     },
-    addData(state, data) {
+    setData(state, data) {
       state.pollData = data;
     },
   },
@@ -24,6 +24,9 @@ export default new Vuex.Store({
         .then(res => res.json())
         .then(data => state.pollData = data)
         .catch(err => console.error(err));
+    },
+    pushData(state, data) {
+
     },
   },
   getters: {

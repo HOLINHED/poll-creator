@@ -60,7 +60,13 @@ export default {
         ],
       };
 
-      store.commit('setData', data);
+      store.dispatch('pushData', data)
+      .finally(function() {
+
+         const id = store.getters.id;
+
+         this.$router.push(`/poll?${id}`);
+      });
     },
   },
 };

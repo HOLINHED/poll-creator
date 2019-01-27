@@ -18,17 +18,18 @@ export default {
   },
   methods: {
     submit() {
-      if (this.id && this.id.toString().length > 2) {
+      if (this.id && this.id.toString().length > 1) {
         store.commit('changeID', this.id);
 
-        this.$router.push('/poll');
+        this.$router.push(`/poll?id=${this.id}`);
       }
-      // TODO: Add error notification
     },
   },
 };
 </script>
 
-<style>
-
+<style scoped>
+input {
+   margin-left: 5px; 
+}
 </style>

@@ -22,11 +22,12 @@ export default new Vuex.Store({
     getData(state, id) {
       fetch(`${config.API}/poll/${id}`)
         .then(res => res.json())
-        .then(data => state.setData(data))
+        .then(data => this.commit('setData', data))
         .catch(err => console.error(err));
     },
     pushData(state, data) {
-      state.setData(data);
+      this.commit('setData', data);
+      console.log('RAW',state.getters.data,'SERVER');
       fetch(`${config.API}/poll`, {
         method: 'POST',
         body: JSON.stringify(state.getters.data),
@@ -34,9 +35,10 @@ export default new Vuex.Store({
           'content-type': 'application/json'
         }
       })
-      .then(res => { return res })
+      .then(res => res.json())
       .then(data => {
-        state.changeID(data.id)
+        this.commit('changeID', data.id || 0);
+        console.log(data);
       })
       .catch(err => console.error(err))
     },

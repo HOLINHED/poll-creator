@@ -60,13 +60,16 @@ export default {
         ],
       };
 
+      const router = this.$router;
+
       store.dispatch('pushData', data)
       .finally(function() {
 
          const id = store.getters.id;
 
-         this.$router.push(`/poll?${id}`);
+         router.push(`/poll?id=${id}`);
       });
+
     },
   },
 };

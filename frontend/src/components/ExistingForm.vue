@@ -19,7 +19,6 @@ export default {
   methods: {
     submit() {
       if (this.id && this.id.toString().length > 1) {
-        store.commit('changeID', this.id);
 
         this.$router.push(`/poll?id=${this.id}`);
       }

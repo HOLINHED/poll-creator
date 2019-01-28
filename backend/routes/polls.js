@@ -13,7 +13,7 @@ router.use(cors());
 router.get('/:pollid', (req, res, next) => {
   res.status(200).json({
     id: req.params.pollid,
-    message: 'hello world'
+    title: 'ADMIN'
   });
 });
 
@@ -23,8 +23,6 @@ router.use(rateLimit({
 }));
 
 router.post('/', (req, res, next) => {
-
-  //console.log(req.body)
   
   let id = "";
 

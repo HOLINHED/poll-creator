@@ -65,9 +65,7 @@ export default {
       store.dispatch('pushData', data)
       .finally(function() {
 
-         const id = store.getters.id;
-
-         router.push(`/poll?id=${id}`);
+         router.push(`/poll`);
       });
 
     },

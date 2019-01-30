@@ -62,12 +62,7 @@ export default {
 
       const router = this.$router;
 
-      store.dispatch('pushData', data)
-      .finally(function() {
-
-         router.push(`/poll`);
-      });
-
+      // TODO: PUSH THE DATA TO SERVER
     },
   },
 };

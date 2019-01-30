@@ -19,7 +19,6 @@ export default {
   methods: {
     submit() {
       if (this.id && this.id.toString().length > 1) {
-
         this.$router.push(`/poll?id=${this.id}`);
       }
     },
@@ -29,6 +28,6 @@ export default {
 
 <style scoped>
 input {
-   margin-left: 5px; 
+   margin-left: 5px;
 }
 </style>

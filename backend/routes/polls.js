@@ -1,3 +1,5 @@
+'use strict'
+
 const express = require('express');
 const monk = require('monk');
 const rateLimit = require('express-rate-limit');
@@ -9,11 +11,11 @@ const polls = db.get('polls')
 
 router.use(cors());
 
-/* GET users listing. */
+// GET EXISTING POLL
 router.get('/:pollid', (req, res, next) => {
   res.status(200).json({
     id: req.params.pollid,
-    title: 'ADMIN'
+    title: req.params.pollid + ' title',
   });
 });
 
@@ -22,6 +24,7 @@ router.use(rateLimit({
   max: 1,
 }));
 
+// CREATE NEW POLL
 router.post('/', (req, res, next) => {
   
   let id = "";
@@ -29,7 +32,7 @@ router.post('/', (req, res, next) => {
   // generate random ID
   for (let i = 0; i < 6; i++) {
 
-    const r = Math.random() > 0.5;
+    const r = Math.random();
 
     if (r > 0.55) {
 
@@ -56,6 +59,11 @@ router.post('/', (req, res, next) => {
   //console.log(data.options)
   
   res.status(200).json(data);
+});
+
+// UPDATE EXISTING POLL
+router.post('/:pollid', (req, res, next) => {
+
 });
 
 module.exports = router;

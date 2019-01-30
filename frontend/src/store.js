@@ -7,11 +7,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    pollID: null,
-    pollData: {
-      title: 'no data',
-      options: []
-    },
+    pollID: undefined,
+    pollData: undefined,
     API: config.API,
   },
   mutations: {

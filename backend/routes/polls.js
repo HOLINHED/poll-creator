@@ -15,7 +15,29 @@ router.use(cors());
 router.get('/:pollid', (req, res, next) => {
   res.status(200).json({
     id: req.params.pollid,
-    title: req.params.pollid + ' title',
+    title: 'Should this poll work correctly?',
+    options: [
+      {
+        desc: 'yes',
+        votes: 10,
+      },
+      {
+        desc: 'no',
+        votes: 99999,
+      },
+      {
+        desc: 'of course not!',
+        votes: 0,
+      },
+      {
+        desc: 'this is a really really really really really really really really really realyl really really really really really long option',
+        votes: 1000,
+      },
+      {
+        desc: 'mystical option 5!',
+        votes: null,
+      },
+    ]
   });
 });
 

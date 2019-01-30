@@ -2,9 +2,22 @@
    <div id="poll">
       <Spinner v-if="page.loading" />
       <div class="form" v-if="!page.loading">
+         <div class="info">
+            <label for="pollid">Poll ID
+               <input v-bind:value="data.id" id="pollid">
+            </label>
+            <label for="polllink">Link
+               <input v-bind:value="page.url" id="polllink">
+            </label>
+         </div>
          <h1>{{ data.title }}</h1>
          <form @submit.prevent="update" class="options">
-            
+            <div class="option" v-for="(option,index) in data.options" :key="option">
+               <label>
+               <input type="radio" name="vote" :value="index">
+               {{ option.desc }} ({{ option.votes }} VOTES)</label>
+            </div>
+            <button type="submit">Submit</button>
          </form>
       </div>
    </div>
@@ -23,25 +36,31 @@ export default {
     return {
       page: {
         loading: true,
+        url: window.location.href,
       },
       data: {
+        id: null,
         title: 'title',
         options: [],
       },
     };
+  },
+  methods: {
+     update(){
+
+     },
   },
   created() {
     const id = this.$route.query.id || store.getters.id;
     const url = store.getters.api;
 
     // console.log(id);
+    this.data.id = id;
 
     store.commit('id', id);
 
     const pollData = this.data;
     const page = this.page;
-
-   if (id !== store.getters.id){
 
     // GET DATA
     fetch(`${url}/poll/${id}`)
@@ -58,14 +77,51 @@ export default {
          page.loading = false;
       })
       .catch(error => console.error(error));
-   } else {
-      this.data = store.getters.data;
-   }
 
   },
 };
 </script>
 
 <style scoped>
+
+.options {
+   display: flex;
+   flex-direction: column;
+   width: 25%;
+   margin: 0 auto;
+   justify-content: space-around;
+}
+
+.option {
+   margin-bottom: 25px;
+   display: flex;
+   flex-direction: row-reverse;
+}
+
+.info {
+   width: 190px;
+   margin: 0 auto;
+   margin-top: 20px;
+}
+
+.info input {
+   margin-bottom: 10px;
+}
+
+label {
+   display: flex;
+   text-align: left;
+   width: 100%;
+}
+
+label input {
+   justify-self: flex-end;
+   margin-right: 10px;
+}
+
+button {
+   width: 50px;
+   margin: 0 auto;
+}
 
 </style>

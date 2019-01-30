@@ -37,7 +37,8 @@ export default {
 }
 
 .rect1, .rect2, .rect3, .rect4, .rect5 {
-   margin-left: 2px;
+   margin-left: 1px;
+   margin-right: 1px;
 }
 
 .spinner .rect2 {

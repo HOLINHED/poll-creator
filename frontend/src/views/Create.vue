@@ -1,30 +1,29 @@
 <template>
    <div id="create">
       <h1>New poll</h1>
-      <form id="poll" @submit.prevent="create()">
+      <Loading v-if="page.loading"/>
+      <form id="poll" @submit.prevent="create()" v-if="!page.loading">
          <label for="title">Title</label>
-         <input v-model="title" name="title" id="title" type="text" required>
+         <input v-model="title" name="title" maxlength="50" id="title" type="text" required>
 
          <div id="options">
             <div>
                <label for="optionOne">Option 1</label>
-               <input v-model="optionOne" name="optionOne" id="optionOne" type="text" required>
+               <input v-model="optionOne.desc" maxlength="120" name="optionOne" id="optionOne" type="text" required>
             </div>
 
             <div>
                <label for="optionTwo">Option 2</label>
-               <input v-model="optionTwo" name="optionTwo" id="optionTwo" type="text" required>
+               <input v-model="optionTwo.desc" maxlength="120" name="optionTwo" id="optionTwo" type="text" required>
             </div>
 
-            <div>
-               <label for="optionThree">Option 3</label>
-               <input v-model="optionThree" name="optionThree" id="optionThree" type="text">
+            <div v-for="(option, index) in options" :key="(option, index)">
+               <label for="">Option {{ index + 3 }}</label>
+               <input type="text" :name="index" maxlength="120" v-model="option.desc">
             </div>
 
-            <div>
-               <label for="optionFour">Option 4</label>
-               <input v-model="optionFour" name="optionFour" id="optionFour" type="text">
-            </div>
+            <button @click="addOption" id="plus" type="button">+</button>
+
          </div>
          <div id="buttons">
             <button type="submit">Create</button>
@@ -35,17 +34,23 @@
 </template>
 
 <script>
-import store from '@/store.js';
+import store from '@/store';
+import Loading from '@/components/Spinner.vue';
 
 export default {
   name: 'Create',
+  components: {
+    Loading,
+  },
   data() {
     return {
+      page: {
+        loading: false,
+      },
       title: null,
-      optionOne: null,
-      optionTwo: null,
-      optionThree: null,
-      optionFour: null,
+      optionOne: { desc: null, votes: 0 },
+      optionTwo: { desc: null, votes: 0 },
+      options: [],
     };
   },
   methods: {
@@ -55,14 +60,37 @@ export default {
         options: [
           this.optionOne,
           this.optionTwo,
-          this.optionThree,
-          this.optionFour,
+          ...this.options,
         ],
       };
 
       const router = this.$router;
 
-      // TODO: PUSH THE DATA TO SERVER
+      const url = store.getters.api;
+
+      fetch(`${url}/poll`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+        .then(res => res.json())
+        .then((dat) => {
+          console.log(dat);
+          router.push(`/poll?id=${dat.id}`);
+        })
+        .catch(err => alert(err));
+
+      // console.log(data);
+    },
+    addOption() {
+      if (this.options.length < 6) {
+        this.options.push({
+          desc: null,
+          votes: 0,
+        });
+      }
     },
   },
 };
@@ -75,6 +103,10 @@ export default {
 
 #buttons {
    margin-top: 20px;
+}
+
+#plus {
+   margin-top: 10px;
 }
 
 label {

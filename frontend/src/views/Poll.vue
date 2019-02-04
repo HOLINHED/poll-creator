@@ -12,9 +12,9 @@
          </div>
          <h1>{{ data.title }}</h1>
          <form @submit.prevent="update" class="options">
-            <div class="option" v-for="(option,index) in data.options" :key="option">
+            <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
                <label>
-               <input type="radio" name="vote" :value="index">
+               <input type="radio" name="vote" :value="index" @click="setIndex(index)">
                {{ option.desc }} ({{ option.votes }} VOTES)</label>
             </div>
             <button type="submit">Submit</button>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import store from '@/store.js';
+import store from '@/store';
 import Spinner from '@/components/Spinner.vue';
 
 export default {
@@ -37,6 +37,7 @@ export default {
       page: {
         loading: true,
         url: window.location.href,
+        index: null,
       },
       data: {
         id: null,
@@ -46,9 +47,40 @@ export default {
     };
   },
   methods: {
-     update(){
+    update() {
+      // console.log("INDEX : " + this.page.index);
 
-     },
+      if (this.page.index) {
+        const url = store.getters.api;
+
+        const data = {
+          id: this.data.id,
+          index: this.page.index,
+        };
+
+        // PUSH UPDATE DATA TO SERVER
+        fetch(`${url}/poll/${this.data.id}`, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'content-type': 'application/json',
+          },
+        })
+          .then(res => res.json())
+          .then((dat) => {
+            console.log(dat);
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      } else {
+        // TODO: Make this an error message instead of an alert.
+        alert('please select an option!');
+      }
+    },
+    setIndex(index) {
+      this.page.index = index;
+    },
   },
   created() {
     const id = this.$route.query.id || store.getters.id;
@@ -65,19 +97,18 @@ export default {
     // GET DATA
     fetch(`${url}/poll/${id}`)
       .then(res => res.json())
-      .then((data) => {
-         console.log(data);
+      .then((dat) => {
+        // console.log(data);
 
-         pollData.title = data.title;
-         pollData.options = data.options;
+        pollData.title = dat.title;
+        pollData.options = dat.options;
 
-         store.commit('data', data);
-         store.commit('id', id);
+        store.commit('data', dat);
+        store.commit('id', id);
 
-         page.loading = false;
+        page.loading = false;
       })
       .catch(error => console.error(error));
-
   },
 };
 </script>

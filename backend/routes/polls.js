@@ -30,12 +30,12 @@ router.get('/:pollid', (req, res, next) => {
         votes: 0,
       },
       {
-        desc: 'this is a really really really really really really really really really realyl really really really really really long option',
+        desc: 'this is a really really really really really really really really really realyl really really really long option',
         votes: 1000,
       },
       {
         desc: 'mystical option 5!',
-        votes: null,
+        votes: -1000,
       },
     ]
   });
@@ -79,13 +79,17 @@ router.post('/', (req, res, next) => {
   }
 
   //console.log(data.options)
+
+  // TODO: put 'data' into a database.
   
   res.status(200).json(data);
 });
 
 // UPDATE EXISTING POLL
 router.post('/:pollid', (req, res, next) => {
+  const data = req.body;
 
+  res.status(200).json(data);
 });
 
 module.exports = router;

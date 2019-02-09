@@ -6,9 +6,31 @@
 </head>
 
 <body>
-  <h1>Invalid Route</h1>
-  <p>There's nothing here!</p>
-  <p>The client is located at <a href="#">holinhed-poll.now.sh</a></p>
+  <h1>Wrong website silly!</h1>
+  <p>Redirecting to client... <p id="time">5</p></p>
+
+  <script>
+
+    let time = 4;
+
+    const timer = document.querySelector('#time');
+
+    // REDIRECT USER TO CORRECT CLIENT
+    setInterval(function(){
+
+      timer.innerHTML = time;
+
+      time--;
+
+      if (time <= 0){
+        time = 0;
+        window.location.replace('https://holinhed-poll.now.sh');
+      }
+      
+    }, 1000);
+  
+  </script>
+
 </body>
 
 </html>

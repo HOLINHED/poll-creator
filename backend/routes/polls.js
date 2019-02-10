@@ -14,11 +14,10 @@ router.use(cors());
 router.use(express.json());
 
 /**
- * @api {get} /poll/:pollid Get the poll data with the corresponding id.
+ * @api {get} /poll/:pollid Get poll data
  * @apiGroup polls
  * 
  * @apiParam {String} pollid The polls unique ID.
- * @apiParamExample {String} Request-example: "3jA8L"
  * 
  * @apiSuccess {json} data The poll data in json form.
  * @apiSuccessExample {json} Success-response:
@@ -86,7 +85,7 @@ router.use(rateLimit({
 }));
 
 /**
- * @api {post} /poll Create a new poll.
+ * @api {post} /poll Create a new poll
  * @apiGroup polls
  * 
  * @apiParam {json} body The data to be made into a poll.
@@ -150,11 +149,10 @@ router.post('/', (req, res) => {
 });
 
 /**
- * @api {post} /poll/:pollid Updates the existing poll with corresponding ID.
+ * @api {post} /poll/:pollid Update existing poll
  * @apiGroup polls
  * 
  * @apiParam {String} pollid The id of the poll to update.
- * @apiParamExample {String} Request-example: "3jA8L"
  * 
  * @apiParam {json} data The data to replace the old poll with.
  * @apiParamExample {json} Request-example:
@@ -173,7 +171,7 @@ router.post('/', (req, res) => {
  *        ]
  *     }
  * 
- * @apiSuccess {json} The updated poll that was inserted into the database.
+ * @apiSuccess {json} dat The updated poll that was inserted into the database.
  * @apiSuccessExample {json} Success-response:
  *     HTTP/1.1 200 OK
  *     {

@@ -55,6 +55,8 @@ export default {
   },
   methods: {
     create() {
+
+      // Creates a data object to be pushed to the server.
       const data = {
         title: this.title,
         options: [
@@ -64,10 +66,12 @@ export default {
         ],
       };
 
+      // Keeps reference to router because it's used in a fetch
       const router = this.$router;
 
       const url = store.getters.api;
 
+      // Push the data to the server to be processed.
       fetch(`${url}/poll`, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -76,15 +80,17 @@ export default {
         },
       })
         .then(res => res.json())
-        .then((dat) => {
-          console.log(dat);
+        .then(dat => {
+          
+          // Redirect user to the created poll.
           router.push(`/poll?id=${dat.id}`);
         })
+        // TODO: Create a component to display errors instead of an alert.
         .catch(err => alert(err));
 
-      // console.log(data);
     },
     addOption() {
+      // Checks to make sure that there are less than 6 options. Max options is 5.
       if (this.options.length < 6) {
         this.options.push({
           desc: null,

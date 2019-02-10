@@ -52,23 +52,27 @@ export default {
       // console.log("INDEX : " + this.page.index);
 
       if (this.page.index) {
+
+        // Subtracting 1 because 0 id a possibility, and then the if statement above
+        // wouldn't allow the update method to run because 0 evaluates to false.
         this.page.index--;
 
         const url = store.getters.api;
 
+        // Creating new data to be pushed
         const data = {
           id: this.data.id,
           title: this.data.title,
           options: this.data.options,
         };
 
+        // Adding 1 vote to the correct option.
         data.options[this.page.index].votes += 1;
 
-        // console.log(`${url}/poll/${this.data.id}`);
-
+        // Storing reference to router because its used in fetch.
         const router = this.$router;
 
-        // PUSH UPDATE DATA TO SERVER
+        // Push updated data to the server.
         fetch(`${url}/poll/${this.data.id}`, {
           method: 'POST',
           body: JSON.stringify(data),
@@ -78,13 +82,12 @@ export default {
         })
           .then(res => res.json())
           .then((dat) => {
-            // console.log(dat);
 
+            // Push data to vuex store before going to results page.s
             store.commit('data', dat);
             store.commit('id', dat.id);
 
             router.push('/results');
-            // console.log(dat);
           })
           .catch((err) => {
             alert(err);
@@ -95,38 +98,43 @@ export default {
       }
     },
     setIndex(index) {
+      // Sets index to 1 above actual index because 0 evaluates to false.
       this.page.index = index + 1;
     },
   },
   created() {
+
+    // Gets data either from url, or vuex store.
     const id = this.$route.query.id || store.getters.id;
     const url = store.getters.api;
 
-    // console.log(id);
     this.data.id = id;
 
+    // Stores id in vuex store
     store.commit('id', id);
 
+    // Keep these references because they're used in fetch.
     const pollData = this.data;
     const page = this.page;
 
-    // GET DATA
+    // Get poll from server.
     fetch(`${url}/poll/${id}`)
       .then(res => res.json())
       .then((dat) => {
-        // console.log(dat);
 
+        // Set data received from server, which is always returned in an
+        // array in index 0.
         pollData.title = dat[0].title;
         pollData.options = dat[0].options;
 
-        // /console.log(pollData.title);
-        // console.log(pollData.options);
-
+        // Store the data in vuex store.
         store.commit('data', dat);
         store.commit('id', id);
 
+        // Set loading to false to allow the user to see the poll.
         page.loading = false;
       })
+      // TODO: put this in an error component.
       .catch(error => console.error(error));
   },
 };

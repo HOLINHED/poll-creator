@@ -24,9 +24,11 @@ export default {
     };
   },
   created() {
-    const data = store.getters.data;
 
-    // console.log(data);
+    // Gets data from vuex store because that's where it was stored
+    // after the votes reuqest was successful.
+
+    const data = store.getters.data;
 
     this.data.id = data.id;
     this.data.title = data.title;

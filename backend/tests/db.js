@@ -32,7 +32,7 @@ const data = {
    ]
 }
 
-// @param data (JSON) The entry to be sent to the database. 
+/** @param data The data to be set */
 function setData(data) {
    polls
    .insert(data)
@@ -43,9 +43,9 @@ function setData(data) {
    console.log('data sould have been inserted now.')
 }
 
-/*
-   @param PollID (string) The ID of the data to replace
-   @param data (JSON) The data to replace the original with
+/**
+ *  @param PollID (string) The ID of the data to replace
+ *  @param data (JSON) The data to replace the original with
 */
 function updateData(PollID, data) {
    polls

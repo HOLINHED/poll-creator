@@ -52,7 +52,6 @@ export default {
       // console.log("INDEX : " + this.page.index);
 
       if (this.page.index) {
-
         // Subtracting 1 because 0 id a possibility, and then the if statement above
         // wouldn't allow the update method to run because 0 evaluates to false.
         this.page.index--;
@@ -82,7 +81,6 @@ export default {
         })
           .then(res => res.json())
           .then((dat) => {
-
             // Push data to vuex store before going to results page.s
             store.commit('data', dat);
             store.commit('id', dat.id);
@@ -103,7 +101,6 @@ export default {
     },
   },
   created() {
-
     // Gets data either from url, or vuex store.
     const id = this.$route.query.id || store.getters.id;
     const url = store.getters.api;
@@ -121,7 +118,6 @@ export default {
     fetch(`${url}/poll/${id}`)
       .then(res => res.json())
       .then((dat) => {
-
         // Set data received from server, which is always returned in an
         // array in index 0.
         pollData.title = dat[0].title;

@@ -17,7 +17,7 @@
                <input v-model="optionTwo.desc" maxlength="120" name="optionTwo" id="optionTwo" type="text" required>
             </div>
 
-            <div v-for="(option, index) in options" :key="(option, index)">
+            <div v-for="(option, index) in options" :key="(option, index)" id="nextOptions">
                <label for="">Option {{ index + 3 }}</label>
                <input type="text" :name="index" maxlength="120" v-model="option.desc">
             </div>
@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     create() {
-
       // Creates a data object to be pushed to the server.
       const data = {
         title: this.title,
@@ -80,14 +79,12 @@ export default {
         },
       })
         .then(res => res.json())
-        .then(dat => {
-          
+        .then((dat) => {
           // Redirect user to the created poll.
           router.push(`/poll?id=${dat.id}`);
         })
         // TODO: Create a component to display errors instead of an alert.
         .catch(err => alert(err));
-
     },
     addOption() {
       // Checks to make sure that there are less than 6 options. Max options is 5.

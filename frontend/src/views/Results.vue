@@ -24,7 +24,6 @@ export default {
     };
   },
   created() {
-
     // Gets data from vuex store because that's where it was stored
     // after the votes reuqest was successful.
 

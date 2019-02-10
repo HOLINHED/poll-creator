@@ -4,41 +4,38 @@ const express = require('express');
 const monk = require('monk');
 const rateLimit = require('express-rate-limit');
 const cors = require('cors');
+const generator = require('./methods/createID.js');
 
 const router = express.Router();
-const db = monk(process.env.MONGO_URI || 'http://localhost/hpoll');
+const db = monk(process.env.MONGO_URI || 'localhost/hpoll');
 const polls = db.get('polls')
 
 router.use(cors());
+router.use(express.json());
 
 // GET EXISTING POLL
 router.get('/:pollid', (req, res, next) => {
-  res.status(200).json({
-    id: req.params.pollid,
-    title: 'Should this poll work correctly?',
-    options: [
-      {
-        desc: 'yes',
-        votes: 10,
-      },
-      {
-        desc: 'no',
-        votes: 99999,
-      },
-      {
-        desc: 'of course not!',
-        votes: 0,
-      },
-      {
-        desc: 'this is a really really really really really really really really really realyl really really really long option',
-        votes: 1000,
-      },
-      {
-        desc: 'mystical option 5!',
-        votes: -1000,
-      },
-    ]
+  const pollID = req.params.pollid;
+  
+  polls
+  .find({ id: pollID })
+  .then(data => {
+    //console.log(data);
+    if (data.length < 1){
+      data.push({
+        title: 'POLL NOT FOUND!',
+        options: []
+      });
+    }
+
+    res.status(200).json(data);
+  })
+  .catch(err => {
+    res.status(200).json({
+      error: err
+    });
   });
+
 });
 
 router.use(rateLimit({
@@ -49,26 +46,7 @@ router.use(rateLimit({
 // CREATE NEW POLL
 router.post('/', (req, res, next) => {
   
-  let id = "";
-
-  // generate random ID
-  for (let i = 0; i < 6; i++) {
-
-    const r = Math.random();
-
-    if (r > 0.55) {
-
-      // uppercase or lowercase letter
-      const alpha = Math.random() > 0.5 ? 65 : 97;
-
-      const char = alpha + (Math.floor(Math.random() * 26));
-
-      id += String.fromCharCode(char);
-    } else {
-      const num = Math.floor(Math.random() * 9);
-      id += num.toString();
-    }
-  }
+  const id = generator.createID();
 
   const options = req.body.options;
 
@@ -78,18 +56,51 @@ router.post('/', (req, res, next) => {
     options,
   }
 
-  //console.log(data.options)
+  //console.log(id);
 
-  // TODO: put 'data' into a database.
+  //console.log(data.options)
+  polls
+  .insert(data)
+  .then(data => {
+    //console.log('DATA INSERTED');
+    res.status(200).json(data);
+  });
   
-  res.status(200).json(data);
 });
 
 // UPDATE EXISTING POLL
 router.post('/:pollid', (req, res, next) => {
   const data = req.body;
+  const pollID = req.params.pollid;
 
-  res.status(200).json(data);
+  if (data.title && data.options.length > 1){
+
+    polls
+    .remove({ id: pollID })
+    .then(() => {
+
+      polls
+      .insert(data)
+      .then(dat => {
+        res.status(200).json(dat);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+  } else {
+
+  res.status(402).json({
+    message: 'Invalid data!'
+  });
+
+}
+
 });
 
 module.exports = router;

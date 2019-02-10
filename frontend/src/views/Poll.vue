@@ -51,12 +51,20 @@ export default {
       // console.log("INDEX : " + this.page.index);
 
       if (this.page.index) {
+
+         this.page.index--;
+
         const url = store.getters.api;
 
         const data = {
           id: this.data.id,
-          index: this.page.index,
+          title: this.data.title,
+          options: this.data.options,
         };
+
+        data.options[this.page.index].votes += 1;
+
+        console.log(`${url}/poll/${this.data.id}`);
 
         // PUSH UPDATE DATA TO SERVER
         fetch(`${url}/poll/${this.data.id}`, {
@@ -79,7 +87,7 @@ export default {
       }
     },
     setIndex(index) {
-      this.page.index = index;
+      this.page.index = index + 1;
     },
   },
   created() {
@@ -98,10 +106,13 @@ export default {
     fetch(`${url}/poll/${id}`)
       .then(res => res.json())
       .then((dat) => {
-        // console.log(data);
+         //console.log(dat);
 
-        pollData.title = dat.title;
-        pollData.options = dat.options;
+        pollData.title = dat[0].title;
+        pollData.options = dat[0].options;
+
+        ///console.log(pollData.title);
+        //console.log(pollData.options);
 
         store.commit('data', dat);
         store.commit('id', id);

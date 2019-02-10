@@ -31,7 +31,6 @@ export default {
   margin: 0 auto;
   justify-items: center;
 }
-
 #new {
   width: 100px;
   margin: 0 auto;

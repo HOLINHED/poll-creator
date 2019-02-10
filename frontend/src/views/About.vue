@@ -15,5 +15,8 @@ export default {
 </script>
 
 <style>
-
+   #about {
+      margin-top: 20px;
+      font-size: 16px;
+   }
 </style>

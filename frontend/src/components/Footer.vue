@@ -1,11 +1,4 @@
 <template>
-<!--
-   <footer id="footer">
-      <a id="redirect" href="https://dawidklat.com">dawidklat.com</a>
-      <a id="github" href="https://github.com/holinhed/poll-creator">Github</a>
-      <a id="contact" href="#">Contact</a>
-   </footer>
--->
   <v-footer dark  id="footer">
     <v-card class="flex" flat tile>
       <v-card-title class="blue">
@@ -14,8 +7,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn flat>Github</v-btn>
-      <v-btn flat>Personal site</v-btn>
+      <v-btn flat href="https://github.com/holinhed/poll-creator">Github</v-btn>
+      <v-btn flat href="https://dawidklat.com">Personal site</v-btn>
 
       </v-card-title>
 
@@ -36,9 +29,5 @@ export default {
   bottom: 0;
   width: 100%;
   text-align: right;
-}
-
-a {
-   margin-right: 20px;
 }
 </style>

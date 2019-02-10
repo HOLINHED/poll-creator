@@ -15,7 +15,8 @@
             <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
                <label>
                <input type="radio" name="vote" :value="index" @click="setIndex(index)">
-               {{ option.desc }} ({{ option.votes }} VOTES)</label>
+               {{ option.desc }} ({{ option.votes }} VOTES)
+               </label>
             </div>
             <button type="submit">Submit</button>
          </form>
@@ -51,8 +52,7 @@ export default {
       // console.log("INDEX : " + this.page.index);
 
       if (this.page.index) {
-
-         this.page.index--;
+        this.page.index--;
 
         const url = store.getters.api;
 
@@ -64,7 +64,9 @@ export default {
 
         data.options[this.page.index].votes += 1;
 
-        console.log(`${url}/poll/${this.data.id}`);
+        // console.log(`${url}/poll/${this.data.id}`);
+
+        const router = this.$router;
 
         // PUSH UPDATE DATA TO SERVER
         fetch(`${url}/poll/${this.data.id}`, {
@@ -76,7 +78,13 @@ export default {
         })
           .then(res => res.json())
           .then((dat) => {
-            console.log(dat);
+            // console.log(dat);
+
+            store.commit('data', dat);
+            store.commit('id', dat.id);
+
+            router.push('/results');
+            // console.log(dat);
           })
           .catch((err) => {
             alert(err);
@@ -106,13 +114,13 @@ export default {
     fetch(`${url}/poll/${id}`)
       .then(res => res.json())
       .then((dat) => {
-         //console.log(dat);
+        // console.log(dat);
 
         pollData.title = dat[0].title;
         pollData.options = dat[0].options;
 
-        ///console.log(pollData.title);
-        //console.log(pollData.options);
+        // /console.log(pollData.title);
+        // console.log(pollData.options);
 
         store.commit('data', dat);
         store.commit('id', id);

@@ -29,6 +29,11 @@ export default new Router({
       component: () => import('./views/Poll.vue'),
     },
     {
+      path: '/results',
+      name: 'results',
+      component: () => import('./views/Results.vue'),
+    },
+    {
       path: '/*',
       name: 'notFound',
       component: () => import('./views/notFound.vue'),

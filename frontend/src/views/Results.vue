@@ -38,8 +38,11 @@ export default {
 
 <style scoped>
    h1 {
-      border-bottom: 1px solid black;
       padding-bottom: 20px;
+   }
+
+   h2 {
+      margin-bottom: 15px;
    }
 
    span {
@@ -59,5 +62,7 @@ export default {
    #container {
       width: 600px;
       margin: 0 auto;
+      margin-top: 20px;
+      font-size: 17px;
    }
 </style>

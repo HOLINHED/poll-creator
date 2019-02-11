@@ -4,7 +4,7 @@
     <p>Create a new poll or access an existing one</p>
     <div class="container">
       <div>
-        <v-btn to="/new">New poll</v-btn>
+        <v-btn to="/new" color="blue" outline>New poll</v-btn>
       </div>
       <ExistingForm />
     </div>
@@ -36,6 +36,5 @@ export default {
 #new {
   width: 100px;
   margin: 0 auto;
-  margin-bottom: 20px;
 }
 </style>

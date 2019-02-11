@@ -3,31 +3,48 @@
       <h1>New poll</h1>
       <Loading v-if="page.loading"/>
       <form id="poll" @submit.prevent="create()" v-if="!page.loading">
-         <label for="title">Title</label>
-         <input v-model="title" name="title" maxlength="50" id="title" type="text" required>
-
-         <div id="options">
-            <div>
-               <label for="optionOne">Option 1</label>
-               <input v-model="optionOne.desc" maxlength="120" name="optionOne" id="optionOne" type="text" required>
-            </div>
-
-            <div>
-               <label for="optionTwo">Option 2</label>
-               <input v-model="optionTwo.desc" maxlength="120" name="optionTwo" id="optionTwo" type="text" required>
-            </div>
-
-            <div v-for="(option, index) in options" :key="(option, index)" id="nextOptions">
-               <label for="">Option {{ index + 3 }}</label>
-               <input type="text" :name="index" maxlength="120" v-model="option.desc">
-            </div>
-
-            <button @click="addOption" id="plus" type="button">+</button>
-
-         </div>
+         <v-text-field 
+            outline 
+            color="blue"
+            placeholder="What do you want to ask?"
+            label="Question"
+            required
+            counter="50"
+            v-model="title"
+         >
+         </v-text-field>
+         <v-text-field 
+            outline 
+            color="blue"
+            label="Option 1"
+            required
+            counter="120"
+            v-model="optionOne.desc"
+         >
+         </v-text-field>
+         <v-text-field 
+            outline 
+            color="blue"
+            label="Option 2"
+            required
+            counter="120"
+            v-model="optionTwo.desc"
+         >
+         </v-text-field>
+         <v-text-field
+            v-for="(option, index) in options" 
+            :key="(option, index)"
+            outline
+            color="blue"
+            v-bind:label="'Option ' + (index + 3)"
+            counter="120"
+            v-model="option.desc"
+         >
+         </v-text-field>
+         <v-btn color="blue" outline @click="addOption" v-if="options.length < 4">Add</v-btn>
          <div id="buttons">
-            <button type="submit">Create</button>
-            <button type="reset">Reset</button>
+            <v-btn color="green" outline type="submit">Create</v-btn>
+            <v-btn color="red" outline type="reset">Reset</v-btn>
          </div>
       </form>
    </div>
@@ -88,7 +105,7 @@ export default {
     },
     addOption() {
       // Checks to make sure that there are less than 6 options. Max options is 5.
-      if (this.options.length < 6) {
+      if (this.options.length < 4) {
         this.options.push({
           desc: null,
           votes: 0,
@@ -100,19 +117,15 @@ export default {
 </script>
 
 <style scoped>
-#options div {
-   margin-top: 30px;
+h1 {
+   margin-bottom: 20px;
 }
-
-#buttons {
+#poll {
+   width: 425px;
+   margin: 0 auto;
+}
+#create {
    margin-top: 20px;
-}
-
-#plus {
-   margin-top: 10px;
-}
-
-label {
-   margin-right: 5px;
+   font-size: 17px;
 }
 </style>

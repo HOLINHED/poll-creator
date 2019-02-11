@@ -7,7 +7,7 @@
     </v-toolbar-items>
 
    <v-spacer></v-spacer>
-   <v-toolbar-title class="white--text">Poll Creator</v-toolbar-title>
+   <v-toolbar-title class="white--text"><strong>Poll Creator</strong></v-toolbar-title>
 
   </v-toolbar>
 </template>

@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-#footer {
+#footer{
   position: fixed;
   left: 0;
   bottom: 0;

@@ -6,6 +6,7 @@
          <div>[{{ index + 1 }}]</div>
          <div>{{ option.desc }} <span>(VOTES {{ option.votes }})</span></div>
       </div>
+      <v-btn to="/" outline color="green">Go home</v-btn>
    </div>
 </template>
 

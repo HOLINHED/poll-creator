@@ -2,24 +2,34 @@
    <div id="poll">
       <Spinner v-if="page.loading" />
       <div class="form" v-if="!page.loading">
-         <div class="info">
-            <label for="pollid">Poll ID
-               <input v-bind:value="data.id" id="pollid">
-            </label>
-            <label for="polllink">Link
-               <input v-bind:value="page.url" id="polllink">
-            </label>
-         </div>
          <h1>{{ data.title }}</h1>
          <form @submit.prevent="update" class="options">
+            <!--
             <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
                <label>
                <input type="radio" name="vote" :value="index" @click="setIndex(index)">
                {{ option.desc }} ({{ option.votes }} VOTES)
                </label>
             </div>
-            <button type="submit">Submit</button>
+            -->
+            
+            <v-btn
+            class="vote" 
+            v-for="(option, index) in data.options"
+            :key="(option, index)"
+            @click="setIndex(index)"
+            color="blue"
+            outline>
+            
+            {{ option.desc }}
+            </v-btn>
+
+            <v-btn type="submit" color="green" outline id="submit">Submit</v-btn>
          </form>
+      </div>
+      <div class="info">
+         <v-text-field default label="Poll ID" v-bind:value="data.id" color="blue"></v-text-field>
+         <v-text-field default label="Link to poll" v-bind:value="page.url" color="blue"></v-text-field>
       </div>
    </div>
 </template>
@@ -138,12 +148,30 @@ export default {
 
 <style scoped>
 
+h1 {
+   width: 700px;
+   margin: 0 auto;
+   padding-bottom: 20px;  
+}
+
+#submit {
+   margin-top: 10px;
+}
+
+.form {
+   margin-top: 20px;
+}
+
 .options {
    display: flex;
    flex-direction: column;
    width: 25%;
    margin: 0 auto;
    justify-content: space-around;
+}
+
+.vote {
+   margin-bottom: 10px;
 }
 
 .option {
@@ -153,7 +181,7 @@ export default {
 }
 
 .info {
-   width: 190px;
+   width: 300px;
    margin: 0 auto;
    margin-top: 20px;
 }

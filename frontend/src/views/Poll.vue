@@ -12,24 +12,39 @@
                </label>
             </div>
             -->
-            
+
             <v-btn
-            class="vote" 
+            class="vote"
             v-for="(option, index) in data.options"
             :key="(option, index)"
             @click="setIndex(index)"
             color="blue"
             outline>
-            
+
             {{ option.desc }}
             </v-btn>
 
-            <v-btn type="submit" color="green" outline id="submit">Submit</v-btn>
+            <v-btn
+              type="submit"
+              color="green"
+              outline
+              id="submit">
+              Submit
+              </v-btn>
          </form>
       </div>
       <div class="info">
-         <v-text-field default label="Poll ID" v-bind:value="data.id" color="blue"></v-text-field>
-         <v-text-field default label="Link to poll" v-bind:value="page.url" color="blue"></v-text-field>
+         <v-text-field
+          default
+          label="Poll ID"
+          v-bind:value="data.id"
+          color="blue">
+          </v-text-field>
+         <v-text-field
+          default
+          label="Link to poll"
+          v-bind:value="page.url"
+          color="blue"></v-text-field>
       </div>
    </div>
 </template>
@@ -64,7 +79,7 @@ export default {
       if (this.page.index) {
         // Subtracting 1 because 0 id a possibility, and then the if statement above
         // wouldn't allow the update method to run because 0 evaluates to false.
-        this.page.index--;
+        this.page.index = this.page.index - 1;
 
         const url = store.getters.api;
 
@@ -151,7 +166,7 @@ export default {
 h1 {
    width: 700px;
    margin: 0 auto;
-   padding-bottom: 20px;  
+   padding-bottom: 20px;
 }
 
 #submit {

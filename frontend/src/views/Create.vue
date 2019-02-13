@@ -3,8 +3,8 @@
       <h1>New poll</h1>
       <Loading v-if="page.loading"/>
       <form id="poll" @submit.prevent="create()" v-if="!page.loading">
-         <v-text-field 
-            outline 
+         <v-text-field
+            outline
             color="blue"
             placeholder="What do you want to ask?"
             label="Question"
@@ -13,8 +13,8 @@
             v-model="title"
          >
          </v-text-field>
-         <v-text-field 
-            outline 
+         <v-text-field
+            outline
             color="blue"
             label="Option 1"
             required
@@ -22,8 +22,8 @@
             v-model="optionOne.desc"
          >
          </v-text-field>
-         <v-text-field 
-            outline 
+         <v-text-field
+            outline
             color="blue"
             label="Option 2"
             required
@@ -32,7 +32,7 @@
          >
          </v-text-field>
          <v-text-field
-            v-for="(option, index) in options" 
+            v-for="(option, index) in options"
             :key="(option, index)"
             outline
             color="blue"

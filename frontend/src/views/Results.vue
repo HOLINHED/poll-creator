@@ -26,7 +26,7 @@ export default {
     return {
       data: {
         id: null,
-        title: 'title',
+        title: 'NO POLL DATA',
         options: [],
       },
       page: {
@@ -37,8 +37,6 @@ export default {
   created() {
     // stores a reference to ID for cleaner code
     const id = this.$route.query.id;
-
-    // console.log(this.$route.query.id);
 
     // checks if id is defined, if true, it will fetch data from server. if
     // false, it will use the data that is currently in the vuex store.
@@ -68,9 +66,16 @@ export default {
       // Data from vuex store
       const data = store.getters.data;
 
-      this.data.id = data.id;
-      this.data.title = data.title;
-      this.data.options = data.options;
+      // try setting data from vuex, if fails,
+      // simply displays the default title
+      try {
+        this.data.title = data.title;
+        this.data.options = data.options;
+
+      } catch(exception) {
+        // TODO: Make this an error dialog component
+        console.error("NO POLL DATA!");
+      }
 
       this.page.loading = false;
     }

@@ -4,15 +4,15 @@
       <div class="form" v-if="!page.loading">
          <h1>{{ data.title }}</h1>
          <form @submit.prevent="update" class="options">
-            <!--
+            
             <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
                <label>
                <input type="radio" name="vote" :value="index" @click="setIndex(index)">
-               {{ option.desc }} ({{ option.votes }} VOTES)
+               {{ option.desc }}
                </label>
             </div>
-            -->
-
+            
+            <!--
             <v-btn
             class="vote"
             v-for="(option, index) in data.options"
@@ -23,7 +23,7 @@
 
             {{ option.desc }}
             </v-btn>
-
+            -->
             <v-btn
               type="submit"
               color="green"
@@ -31,6 +31,7 @@
               id="submit">
               Submit
               </v-btn>
+              
          </form>
       </div>
       <div class="info">

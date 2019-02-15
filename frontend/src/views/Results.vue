@@ -52,8 +52,8 @@ export default {
       fetch(`${api}/poll/${id}`)
         .then(res => res.json())
         .then((dat) => {
-          console.log('fetch complete!');
-          console.log(dat);
+          //console.log('fetch complete!');
+          //console.log(dat);
 
           pollData.id = dat[0].id;
           pollData.title = dat[0].title;

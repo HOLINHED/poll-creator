@@ -4,9 +4,7 @@
     <p>Create a new poll or access an existing one</p>
     <div class="container">
       <div>
-        <router-link to="/new">
-          <button id="new">New poll</button>
-        </router-link>
+        <v-btn to="/new" color="blue" outline>New poll</v-btn>
       </div>
       <ExistingForm />
     </div>
@@ -26,15 +24,17 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  margin-top: 20px;
+  font-size: 17px;
+}
 .container {
   width: 50%;
   margin: 0 auto;
   justify-items: center;
 }
-
 #new {
   width: 100px;
   margin: 0 auto;
-  margin-bottom: 20px;
 }
 </style>

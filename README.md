@@ -1,5 +1,7 @@
 # poll creator
 
+Live version at: https://holinhed-poll.now.sh/
+
 ## Project setup
 ```
 yarn install

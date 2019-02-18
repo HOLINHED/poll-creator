@@ -5,25 +5,18 @@
          <h1>{{ data.title }}</h1>
          <form @submit.prevent="update" class="options">
 
-            <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
-               <label>
-               <input type="radio" name="vote" :value="index" @click="setIndex(index)">
-               {{ option.desc }}
-               </label>
-            </div>
+            <v-radio-group v-model="radios">
+              <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
+                <label @click="setIndex(index)">
+                <v-radio
+                  name="vote"
+                  :value="index"
+                  @click="setIndex(index)"
+                  :label="option.desc"></v-radio>
+                </label>
+              </div>
+            </v-radio-group>
 
-            <!--
-            <v-btn
-            class="vote"
-            v-for="(option, index) in data.options"
-            :key="(option, index)"
-            @click="setIndex(index)"
-            color="blue"
-            outline>
-
-            {{ option.desc }}
-            </v-btn>
-            -->
             <v-btn
               type="submit"
               color="green"

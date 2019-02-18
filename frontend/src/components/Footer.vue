@@ -2,7 +2,7 @@
   <v-footer
     dark
     height="auto"
-    
+
   >
     <v-card
       class="flex"

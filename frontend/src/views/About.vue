@@ -22,5 +22,6 @@ export default {
    #about {
       margin-top: 20px;
       font-size: 16px;
+      height: 100%;
    }
 </style>

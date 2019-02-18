@@ -27,6 +27,7 @@ export default {
 .home {
   margin-top: 20px;
   font-size: 17px;
+  height: 100%;
 }
 .container {
   width: 50%;

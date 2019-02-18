@@ -41,7 +41,7 @@
             v-model="option.desc"
          >
          </v-text-field>
-         <v-btn color="blue" outline @click="addOption" v-if="options.length < 4">Add</v-btn>
+         <v-btn color="blue" outline @click="addOption" v-if="options.length < 3">Add</v-btn>
          <div id="buttons">
             <v-btn color="green" outline type="submit">Create</v-btn>
             <v-btn color="red" outline type="reset">Reset</v-btn>
@@ -105,7 +105,7 @@ export default {
     },
     addOption() {
       // Checks to make sure that there are less than 6 options. Max options is 5.
-      if (this.options.length < 4) {
+      if (this.options.length < 3) {
         this.options.push({
           desc: null,
           votes: 0,
@@ -125,7 +125,9 @@ h1 {
    margin: 0 auto;
 }
 #create {
+   height: 100%;
    margin-top: 20px;
    font-size: 17px;
+   padding-bottom: 30px;
 }
 </style>

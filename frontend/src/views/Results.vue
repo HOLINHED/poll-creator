@@ -52,8 +52,8 @@ export default {
       fetch(`${api}/poll/${id}`)
         .then(res => res.json())
         .then((dat) => {
-          //console.log('fetch complete!');
-          //console.log(dat);
+          // console.log('fetch complete!');
+          // console.log(dat);
 
           pollData.id = dat[0].id;
           pollData.title = dat[0].title;
@@ -71,10 +71,9 @@ export default {
       try {
         this.data.title = data.title;
         this.data.options = data.options;
-
-      } catch(exception) {
+      } catch (exception) {
         // TODO: Make this an error dialog component
-        console.error("NO POLL DATA!");
+        console.error('NO POLL DATA!');
       }
 
       this.page.loading = false;

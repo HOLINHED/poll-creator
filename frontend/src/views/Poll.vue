@@ -4,14 +4,14 @@
       <div class="form" v-if="!page.loading">
          <h1>{{ data.title }}</h1>
          <form @submit.prevent="update" class="options">
-            
+
             <div class="option" v-for="(option,index) in data.options" :key="(option,index)">
                <label>
                <input type="radio" name="vote" :value="index" @click="setIndex(index)">
                {{ option.desc }}
                </label>
             </div>
-            
+
             <!--
             <v-btn
             class="vote"
@@ -31,7 +31,7 @@
               id="submit">
               Submit
               </v-btn>
-              
+
          </form>
       </div>
       <div class="info">
@@ -163,6 +163,10 @@ export default {
 </script>
 
 <style scoped>
+
+#poll {
+  height: 100%;
+}
 
 h1 {
    width: 700px;

@@ -11,6 +11,7 @@
             required
             counter="50"
             v-model="title"
+            maxlength="50"
          >
          </v-text-field>
          <v-text-field
@@ -20,6 +21,7 @@
             required
             counter="120"
             v-model="optionOne.desc"
+            maxlength="120"
          >
          </v-text-field>
          <v-text-field
@@ -29,6 +31,7 @@
             required
             counter="120"
             v-model="optionTwo.desc"
+            maxlength="120"
          >
          </v-text-field>
          <v-text-field
@@ -39,6 +42,7 @@
             v-bind:label="'Option ' + (index + 3)"
             counter="120"
             v-model="option.desc"
+            maxlength="120"
          >
          </v-text-field>
          <v-btn color="blue" outline @click="addOption" v-if="options.length < 3">Add</v-btn>

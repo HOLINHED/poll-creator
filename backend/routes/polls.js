@@ -128,7 +128,15 @@ router.post('/', (req, res) => {
   // Unique ID, Imported from /methods/createID.js
   const id = generator.createID();
 
-  const options = req.body.options;
+  // Iterates through options to make sure 
+  // they have a description.
+  const options = [];
+
+  for (let option of req.body.options) {
+
+    if (option.desc) options.push(option);
+    
+  }
 
   // Data to be inserted into the database.
   const data = {

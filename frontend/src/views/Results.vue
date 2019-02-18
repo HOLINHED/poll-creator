@@ -110,5 +110,6 @@ export default {
       margin: 0 auto;
       margin-top: 20px;
       font-size: 17px;
+      height: 100%;
    }
 </style>

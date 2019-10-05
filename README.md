@@ -1,6 +1,7 @@
 # poll creator
 
 Live version at: https://holinhed-poll.now.sh/
+(Bunch of things broken in deployment because of now 2.0. I might fix it idk)
 
 ## Project setup
 ```
